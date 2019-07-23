@@ -16,14 +16,26 @@ my ($curname) = $cwd =~ m!/([^/]*)$!;
 GetOptionsWithCompletion(
     sub {
         my %args = @_;
+        my $type = $args{type};
         my $word = $args{word};
 
         if ($word eq '') {
             my $res = hashify_answer(
-                complete_array_elem(word=>$args{word}, array=>[$curname, "$curname "]),
+                complete_array_elem(
+                    word=>$word, array=>[$curname, "$curname "]),
             );
             $res->{final} = 1;
             return $res;
+        } elsif ($type eq 'arg') {
+            my @dirs;
+            opendir my $dh, "..";
+            for my $e (readdir $dh) {
+                next if $e eq '.' || $e eq '..';
+                next unless -d "../$e";
+                push @dirs, $e;
+            }
+            return complete_array_elem(
+                word=>$word, array=>\@dirs);
         }
         undef;
     },

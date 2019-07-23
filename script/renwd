@@ -1,0 +1,21 @@
+#!perl
+
+# DATE
+# VERSION
+
+use strict;
+use warnings;
+
+use Getopt::Long::Complete;
+
+1;
+# ABSTRACT: REName current (Working Directory)
+# PODNAME:
+
+=head1 SYNOPSIS
+
+This is a simple convenient script to do:
+
+ % mv ../curdirname ../newname
+
+=cut

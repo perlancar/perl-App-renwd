@@ -10,4 +10,11 @@ package App::renwd;
 
 See the command-line script L<renwd>.
 
+
+=head1 SEE ALSO
+
+L<perlmv> from L<App::perlmv>
+
+L<App::RenameUtils>
+
 =cut

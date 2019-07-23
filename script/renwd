@@ -6,7 +6,46 @@
 use strict;
 use warnings;
 
-use Getopt::Long::Complete;
+use Complete::Util qw(complete_array_elem hashify_answer);
+use Cwd qw(getcwd);
+use Getopt::Long::Complete qw(GetOptionsWithCompletion);
+
+my $cwd = getcwd();
+my ($curname) = $cwd =~ m!/([^/]*)$!;
+
+GetOptionsWithCompletion(
+    sub {
+        my %args = @_;
+        my $word = $args{word};
+
+        if ($word eq '') {
+            my $res = hashify_answer(
+                complete_array_elem(word=>$args{word}, array=>[$curname, "$curname "]),
+            );
+            $res->{final} = 1;
+            return $res;
+        }
+        undef;
+    },
+    'help|h' => sub {
+        print <<USAGE;
+Usage:
+  % renwd <newname>
+Options:
+  --help, -h
+  --version, -v
+USAGE
+        exit 0;
+    },
+    'version|v' => sub {
+        no warnings 'once';
+        print "renwd version ", ($main::VERSION || "dev"), "\n";
+        exit 0;
+    },
+);
+die "Usage: renwd <newname>\n" unless @ARGV == 1;
+
+rename "../$curname", "../$ARGV[0]" or die "renwd: Can't rename: $!\n";
 
 1;
 # ABSTRACT: REName current (Working Directory)
@@ -14,8 +53,15 @@ use Getopt::Long::Complete;
 
 =head1 SYNOPSIS
 
-This is a simple convenient script to do:
+This is a script to do the simple:
 
  % mv ../curdirname ../newname
+
+except with one convenience: tab completion. If you activate tab completion for
+this script (e.g. via C<complete -C renwd renwd>), then you can do:
+
+ % renwd <Tab>
+
+and the current directory name is completed for you to edit/modify/
 
 =cut

@@ -57,6 +57,7 @@ USAGE
 );
 die "Usage: renwd <newname>\n" unless @ARGV == 1;
 
+-e "../$ARGV[0]" and die "renwd: Can't rename: ../$ARGV[0] already exists\n";
 rename "../$curname", "../$ARGV[0]" or die "renwd: Can't rename: $!\n";
 
 1;

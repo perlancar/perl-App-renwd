@@ -80,4 +80,17 @@ this script (e.g. via C<complete -C renwd renwd>), then you can do:
 
 and the current directory name is completed for you to edit/modify/
 
+=for BEGIN_BLOCK: protip_renwd_cd
+
+Pro-tip: install this bash function to be able to rename current directory as
+well as cd to the new directory (tab completion is also provided):
+
+# EXAMPLE: share/renwd-cd.bash
+
+Afterwards, you can:
+
+ % renwd-cd foo<Tab>
+
+=for END_BLOCK: protip_renwd_cd
+
 =cut

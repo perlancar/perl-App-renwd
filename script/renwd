@@ -12,6 +12,7 @@ use Getopt::Long::Complete qw(GetOptionsWithCompletion);
 
 my $cwd = getcwd();
 my ($curname) = $cwd =~ m!/([^/]*)$!;
+my $print = 0;
 
 GetOptionsWithCompletion(
     sub {
@@ -54,11 +55,13 @@ USAGE
         print "renwd version ", ($main::VERSION || "dev"), "\n";
         exit 0;
     },
+    print => \$print,
 );
 die "Usage: renwd <newname>\n" unless @ARGV == 1;
 
 -e "../$ARGV[0]" and die "renwd: Can't rename: ../$ARGV[0] already exists\n";
 rename "../$curname", "../$ARGV[0]" or die "renwd: Can't rename: $!\n";
+print "$ARGV[0]\n" if $print;
 
 1;
 # ABSTRACT: REName current (Working Directory)

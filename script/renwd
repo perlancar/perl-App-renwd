@@ -64,7 +64,7 @@ rename "../$curname", "../$ARGV[0]" or die "renwd: Can't rename: $!\n";
 print "$ARGV[0]\n" if $print;
 
 1;
-# ABSTRACT: REName current (Working Directory)
+# ABSTRACT: REName current (Working) Directory
 # PODNAME:
 
 =head1 SYNOPSIS

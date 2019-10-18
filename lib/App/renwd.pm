@@ -4,7 +4,7 @@ package App::renwd;
 # VERSION
 
 1;
-# ABSTRACT: REName current (Working Directory)
+# ABSTRACT: REName current (Working) Directory
 
 =head1 SYNOPSIS
 

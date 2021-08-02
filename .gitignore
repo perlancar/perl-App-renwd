@@ -2,3 +2,4 @@ App-renwd-*
 .build
 *~
 nytprof*
+.DS_Store
